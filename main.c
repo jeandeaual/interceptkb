@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
     }
 
     printf("Reading from %s\n", name);
-/dev/input/by-id/usb-RDing_FootSwitch1F1.-event-kbd
+
     if (ioctl(input_fd, EVIOCGRAB, 1) != 0) {
         fprintf(stderr, "Unable to get exclusive access to \"%s\": %s\n",
                 device_path, strerror(errno));
