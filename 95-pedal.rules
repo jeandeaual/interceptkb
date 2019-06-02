@@ -1,0 +1,1 @@
+ACTION=="add", ATTRS{idVendor}=="0c45", ATTRS{idProduct}=="7403", TAG+="systemd", ENV{SYSTEMD_WANTS}="interceptkb.service"
