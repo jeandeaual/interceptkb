@@ -23,9 +23,10 @@ jobs:
       - name: Run CMake with Ninja
         uses: lukka/run-cmake@v3
         with:
-          cmakeAppendedArgs: -DCMAKE_BUILD_TYPE=Release
-          cmakeGenerator: Ninja
-          buildDirectory: ${{ github.workspace }}/build
+          cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
+          buildDirectory: '${{ github.workspace }}/build'
+          buildWithCMakeArgs: '-- -v'
+          cmakeAppendedArgs: '-GNinja -DCMAKE_BUILD_TYPE=Release'
       - name: Copy the files to the release directory
         run: mkdir release && cp LICENSE *.rules *.service build/interceptkb release/
       - name: Get short SHA
