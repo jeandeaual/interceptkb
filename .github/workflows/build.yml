@@ -26,7 +26,7 @@ jobs:
           cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
           buildDirectory: '${{ github.workspace }}/build'
           buildWithCMakeArgs: '-- -v'
-          cmakeAppendedArgs: '-GNinja -DCMAKE_BUILD_TYPE=Release'
+          cmakeAppendedArgs: '-GNinja -DCMAKE_BUILD_TYPE="Release" -DCMAKE_C_FLAGS="-s"'
       - name: Copy the files to the release directory
         run: mkdir release && cp LICENSE *.rules *.service build/interceptkb release/
       - name: Get short SHA

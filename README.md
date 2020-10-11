@@ -15,7 +15,7 @@ This only works on Linux.
     ```bash
     mkdir build
     cd build
-    cmake -DCMAKE_BUILD_TYPE=Debug ..
+    cmake -DCMAKE_BUILD_TYPE="Debug" ..
     cmake --build .
     ```
 
@@ -24,7 +24,7 @@ This only works on Linux.
     ```bash
     mkdir build
     cd build
-    cmake -DCMAKE_BUILD_TYPE=Release ..
+    cmake -DCMAKE_BUILD_TYPE="Release" -DCMAKE_C_FLAGS="-s" ..
     cmake --build .
     ```
 
