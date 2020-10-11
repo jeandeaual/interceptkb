@@ -1,0 +1,38 @@
+name: build
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+    inputs: {}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      - name: Get the latest CMake and Ninja
+        uses: lukka/get-cmake@latest
+      - name: Run CMake with Ninja
+        uses: lukka/run-cmake@v3
+        with:
+          cmakeAppendedArgs: -DCMAKE_BUILD_TYPE=Release
+          cmakeGenerator: Ninja
+          buildDirectory: ${{ github.workspace }}/build
+      - name: Copy additional files to the build directory
+        run: cp LICENSE *.rules *.service build/
+      - name: Get short SHA
+        id: slug
+        run: echo "::set-output name=sha7::$(echo ${GITHUB_SHA} | cut -c1-7)"
+      - name: Upload
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: interceptkb-amd64-${{ steps.slug.outputs.sha7 }}
+          path: build
