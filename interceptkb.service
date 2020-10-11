@@ -1,6 +1,6 @@
 # http://stackoverflow.com/questions/18463755/linux-start-daemon-on-connected-usb-serial-dongle
 [Unit]
-Description=USB serial to socket bridge
+Description=interceptkb
 After=remote-fs.target
 After=syslog.target
 
