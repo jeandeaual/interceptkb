@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
     int out_key = DEFAULT_OUT_KEY;
     int input_fd = 0;
     int uinput_fd = 0;
+    int exit_code = EXIT_SUCCESS;
 
     /* Check the arguments */
     if (argc > 3) {
@@ -105,10 +106,12 @@ int main(int argc, char *argv[])
         if (rd == -1) {
             fprintf(stderr, "Unable to read from \"%s\": %s\n",
                     name, strerror(errno));
+            exit_code = EXIT_FAILURE;
             break;
         } else if (rd < ((ssize_t) sizeof(event))) {
             fprintf(stderr, "Not enough data read from \"%s\": %zd\n",
                     name, rd);
+            exit_code = EXIT_FAILURE;
             break;
         }
 
@@ -166,6 +169,7 @@ int main(int argc, char *argv[])
         if (write(uinput_fd, &event, sizeof(event)) < 0) {
             fprintf(stderr, "Unable to write to \"%s\": %s\n",
                     UINPUT_PATH, strerror(errno));
+            exit_code = EXIT_FAILURE;
             break;
         }
     }
@@ -197,7 +201,7 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    return EXIT_SUCCESS;
+    return exit_code;
 }
 
 void usage(char *name)
