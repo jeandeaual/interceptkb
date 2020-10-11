@@ -26,8 +26,8 @@ jobs:
           cmakeAppendedArgs: -DCMAKE_BUILD_TYPE=Release
           cmakeGenerator: Ninja
           buildDirectory: ${{ github.workspace }}/build
-      - name: Copy additional files to the build directory
-        run: cp LICENSE *.rules *.service build/
+      - name: Copy the files to the release directory
+        run: mkdir release && cp LICENSE *.rules *.service build/interceptkb release/
       - name: Get short SHA
         id: slug
         run: echo "::set-output name=sha7::$(echo ${GITHUB_SHA} | cut -c1-7)"
@@ -35,4 +35,4 @@ jobs:
         uses: actions/upload-artifact@v1.0.0
         with:
           name: interceptkb-amd64-${{ steps.slug.outputs.sha7 }}
-          path: build
+          path: release
